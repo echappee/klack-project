@@ -5,3 +5,7 @@
   margin: auto;
   width: 1000px;
 }
+
+div .ant-col {
+  padding-bottom: 15px;
+}

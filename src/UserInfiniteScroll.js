@@ -3,14 +3,13 @@ import { Card, Col, Row } from 'antd';
 import axios from 'axios';
 import './UserInfiniteScroll.css';
 
-
-
 const { Meta } = Card;
 
 export class UserInfiniteScroll extends Component {
 
     state = {
-        users: []
+        users: [],
+        loading: false
     };
 
     componentDidMount() {
@@ -37,10 +36,14 @@ export class UserInfiniteScroll extends Component {
                 console.log(this.state.users[this.state.users.length - 1])
 
                 const lastId = this.state.users[this.state.users.length - 1].id
+                // MAJ du loading 
+                this.setState({ users: this.state.users, loading: true }) 
 
                 // rajoute les nouveaux users à la liste des users déjà chargés
                 axios.get('https://api.github.com/users?since=' + lastId)
-                    .then(response => this.setState({ users: this.state.users.concat(response.data) }))
+                    .then(response => {
+                        this.setState({ users: this.state.users.concat(response.data), loading: false })
+                    })
             }
         })
     }
@@ -64,6 +67,7 @@ export class UserInfiniteScroll extends Component {
                         )
                         }
                     </Row>
+
                 </ div>
             </div >
         )
