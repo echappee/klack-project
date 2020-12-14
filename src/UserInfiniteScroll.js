@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Col, Row } from 'antd';
 import axios from 'axios';
-import './UserInfiniteScroll.css';
 
 const { Meta } = Card;
 
